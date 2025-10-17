@@ -15,8 +15,18 @@ body {
 }
 a { text-decoration: none; color: inherit; }
 h1,h2,h3,h4 { margin-bottom: 15px; font-weight: 600; }
-section { margin-bottom: 80px; opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
-section.visible { opacity: 1; transform: translateY(0); }
+
+/* Section Containers */
+.section-card {
+    background-color: #164040;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 1200px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+.section-card:hover { transform: translateY(-4px); }
 
 /* Header */
 header {
@@ -39,96 +49,121 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
     justify-content: center;
     min-height: 50vh;
     text-align: center;
-    background-color: #0B3D2E;
     padding: 40px 20px;
 }
 #hero img { width: 80%; max-width: 600px; border-radius:10px; margin-top: 20px; }
 
-/* Cards */
-.card, .update-card {
-    background-color: #164040;
-    color: #fff;
-    padding: 20px;
+/* Featured Resources Carousel */
+#featured-resources { text-align:center; }
+.featured-container { display:flex; justify-content:center; align-items:center; gap:20px; position:relative; flex-wrap:wrap; }
+.featured-card {
+    background-color: #1C3F5C;
     border-radius: 12px;
-    width: 300px;
-    height: 200px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 220px;
+    height: 180px;
+    padding: 20px;
+    transition: all 0.5s ease;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
 }
-.card:hover, .update-card:hover { transform: translateY(-6px); box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
-
-/* Sections */
-#featured-resources { padding: 0 20px; }
-.highlight-cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.featured-card.center {
+    width: 300px;
+    height: 220px;
+    background-color: #164040;
+}
+.featured-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background:none;
+    border:none;
+    color:white;
+    font-size:2rem;
+    cursor:pointer;
+    user-select:none;
+    transition: all 0.3s ease;
+}
+.featured-nav:hover { color:#aaddff; }
+.featured-nav.left { left:-50px; }
+.featured-nav.right { right:-50px; }
 
 /* Community Directory */
-#community-directory { padding: 0 20px; text-align: center; }
-.directory-header { display:flex; justify-content:center; align-items:center; gap:10px; cursor:pointer; }
-.directory-header svg { width: 20px; height: 20px; transition: transform 0.3s ease; }
-.directory-container { overflow: hidden; transition: max-height 0.6s ease, opacity 0.6s ease; }
+#community-directory { text-align:center; }
+.directory-container {
+    margin-top:20px;
+    border-radius:12px;
+    padding:20px;
+    background-color: rgba(255,255,255,0.05);
+    backdrop-filter: blur(8px);
+    transition: max-height 0.6s ease, opacity 0.6s ease;
+    overflow:hidden;
+}
 .directory-container.closed { max-height:0; opacity:0; }
 .directory-container.open { max-height:2000px; opacity:1; }
-.directory-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:20px; justify-items:center; margin-top:15px; }
+.directory-header { display:flex; justify-content:center; align-items:center; gap:10px; cursor:pointer; margin-bottom:15px; }
+.directory-header svg { width: 24px; height:24px; transition: transform 0.3s ease; }
+.directory-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px; justify-items:center; }
+
+/* Directory Cards */
+.card {
+    background-color:#1C3F5C;
+    border-radius:12px;
+    width:100%;
+    padding:15px;
+    height:160px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    transition: all 0.3s ease;
+}
+.card:hover { transform: scale(1.05); }
+
+/* Search Bar */
 .search-bar {
     backdrop-filter: blur(8px);
     background-color: rgba(255,255,255,0.15);
     border-radius: 12px;
-    padding: 12px;
-    width: 250px;
-    max-width: 90%;
-    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 15px;
+    width: 200px;
+    border:1px solid rgba(255,255,255,0.3);
     color:#fff;
+    margin:5px;
     transition: all 0.3s ease;
 }
 .search-bar::placeholder { color: rgba(255,255,255,0.7); }
-.search-bar:focus {
-    background-color: rgba(255,255,255,0.25);
-    box-shadow: 0 0 15px rgba(255,255,255,0.3);
-    outline:none;
-}
+.search-bar:focus { background-color: rgba(255,255,255,0.25); box-shadow: 0 0 12px rgba(255,255,255,0.3); outline:none; }
 
-/* Updates */
-#community-updates { padding: 0 20px; }
-.update-cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-
-/* Submit Resource */
+/* Submit Resource Form */
 #submit-resource form {
-    background-color: #164040;
-    padding: 30px;
-    border-radius: 15px;
-    max-width:500px; 
-    margin:auto;
-    display:flex;
-    flex-direction: column;
-    gap:10px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    display:flex; flex-direction:column; gap:10px;
 }
-#submit-resource form:hover { transform: translateY(-4px); }
+input, textarea, select { width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); color:#fff; transition:all 0.3s ease; }
+input:focus, textarea:focus, select:focus { background: rgba(255,255,255,0.15); box-shadow:0 0 12px rgba(255,255,255,0.2); outline:none; }
 
 /* Buttons */
 button {
     background-color: #1C3F5C;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    padding:10px 20px;
+    cursor:pointer;
+    transition:all 0.3s ease;
 }
-button:hover { background-color: #164040; }
+button:hover { background-color:#164040; }
+
+/* Updates */
+.update-cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
 
 /* Footer */
-footer { text-align: center; background-color: #1C3F5C; color: #fff; padding: 10px 20px; position: relative; }
-#footer-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
-#footer-content.open { max-height: 200px; padding: 20px 0; }
-
-input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); color:#fff; transition: all 0.3s ease; }
-input:focus, textarea:focus, select:focus { background: rgba(255,255,255,0.15); outline:none; box-shadow:0 0 12px rgba(255,255,255,0.2);}
+footer { text-align:center; background-color: #1C3F5C; color:#fff; padding:10px 20px; position:relative; }
+#footer-content { max-height:0; overflow:hidden; transition:max-height 0.3s ease, padding 0.3s ease; }
+#footer-content.open { max-height:200px; padding:20px 0; }
 </style>
 </head>
 <body>
@@ -153,23 +188,30 @@ input:focus, textarea:focus, select:focus { background: rgba(255,255,255,0.15); 
     <img src="https://via.placeholder.com/600x250" alt="Community Hero Banner">
 </section>
 
-<section id="about">
+<section id="about" class="section-card">
     <h2>About</h2>
     <p>This hub provides centralized information on community services, events, and programs in Sammamish.</p>
 </section>
 
-<section id="featured-resources">
+<section id="featured-resources" class="section-card">
     <h2>Featured Resources</h2>
-    <div class="highlight-cards" id="featuredList"></div>
+    <div class="featured-container" id="featuredContainer">
+        <button class="featured-nav left" id="prevBtn">&#10094;</button>
+        <div class="featured-card" id="leftCard"></div>
+        <div class="featured-card center" id="centerCard"></div>
+        <div class="featured-card" id="rightCard"></div>
+        <button class="featured-nav right" id="nextBtn">&#10095;</button>
+    </div>
 </section>
 
-<section id="community-directory">
+<section id="community-directory" class="section-card">
+    <h2>Community Directory</h2>
     <div class="directory-header" id="directoryToggle">
-        <h2>Community Directory</h2>
+        <span>Toggle Directory</span>
         <svg id="dirArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>
     </div>
     <div class="directory-container closed" id="directoryContainer">
-        <div class="directory-controls">
+        <div>
             <input type="text" id="searchInput" class="search-bar" placeholder="Search resources...">
             <select id="categorySelect" class="search-bar">
                 <option value="">All Categories</option>
@@ -183,7 +225,7 @@ input:focus, textarea:focus, select:focus { background: rgba(255,255,255,0.15); 
     </div>
 </section>
 
-<section id="submit-resource">
+<section id="submit-resource" class="section-card">
     <h2>Submit a New Resource</h2>
     <form id="resourceForm">
         <input type="text" id="resName" placeholder="Resource Name" required>
@@ -200,12 +242,12 @@ input:focus, textarea:focus, select:focus { background: rgba(255,255,255,0.15); 
     </form>
 </section>
 
-<section id="community-updates">
+<section id="community-updates" class="section-card">
     <h2>Community Updates</h2>
     <div class="update-cards" id="updatesList">
-        <div class="update-card"><h4>Sammamish Summer Festival</h4><p>June 15th, live music, food vendors, and family activities.</p></div>
-        <div class="update-card"><h4>Youth Program Launch</h4><p>Starting August 1st, free workshops for teenagers at the Community Center.</p></div>
-        <div class="update-card"><h4>Volunteer Opportunities</h4><p>Help at the food bank, community center, or local events.</p></div>
+        <div class="update-card card"><h4>Sammamish Summer Festival</h4><p>June 15th, live music, food vendors, and family activities.</p></div>
+        <div class="update-card card"><h4>Youth Program Launch</h4><p>Starting August 1st, free workshops for teenagers at the Community Center.</p></div>
+        <div class="update-card card"><h4>Volunteer Opportunities</h4><p>Help at the food bank, community center, or local events.</p></div>
     </div>
 </section>
 </main>
@@ -263,6 +305,7 @@ let resources = [
     {name:"Sammamish Farmers Market", description:"Every Saturday May-Sept, local produce and crafts.", category:"Event", popularity:2}
 ];
 
+// Community Directory Rendering
 function renderDirectory(){
     const list = document.getElementById('directoryList');
     list.innerHTML = '';
@@ -276,19 +319,34 @@ function renderDirectory(){
     });
 }
 
+// Featured Resources Carousel
+let featuredOrder = [0,1,2]; // left, center, right
 function updateFeatured(){
-    const featuredList = document.getElementById('featuredList');
-    featuredList.innerHTML = '';
-    const top = [...resources].sort((a,b)=>b.popularity-a.popularity).slice(0,3);
-    top.forEach(res=>{
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `<h3>${res.name}</h3><p>${res.description}</p>`;
-        featuredList.appendChild(card);
-    });
+    let sorted = [...resources].sort((a,b)=>b.popularity-a.popularity);
+    featuredOrder = [0,1,2];
+    renderCarousel();
+}
+function renderCarousel(){
+    const leftCard = document.getElementById('leftCard');
+    const centerCard = document.getElementById('centerCard');
+    const rightCard = document.getElementById('rightCard');
+    const sorted = [...resources].sort((a,b)=>b.popularity-a.popularity);
+    leftCard.innerHTML = `<h3>${sorted[0].name}</h3><p>${sorted[0].description}</p>`;
+    centerCard.innerHTML = `<h3>${sorted[1].name}</h3><p>${sorted[1].description}</p>`;
+    rightCard.innerHTML = `<h3>${sorted[2].name}</h3><p>${sorted[2].description}</p>`;
 }
 renderDirectory();
 updateFeatured();
+
+// Carousel buttons
+document.getElementById('prevBtn').addEventListener('click',()=>{
+    resources.unshift(resources.pop());
+    updateFeatured();
+});
+document.getElementById('nextBtn').addEventListener('click',()=>{
+    resources.push(resources.shift());
+    updateFeatured();
+});
 
 // Search/filter
 document.getElementById('searchInput').addEventListener('input',filterDirectory);
