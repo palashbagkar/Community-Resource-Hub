@@ -1,220 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sammamish Community Resource Hub</title>
-    <style>
-        /* --- Basic Reset --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sammamish Community Resource Hub</title>
+<style>
+    /* --- Basic Reset --- */
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; background-color: #f5f5f5; color: #333; scroll-behavior: smooth; }
+    a { text-decoration: none; color: inherit; }
+    section { margin-bottom: 80px; opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+    section.visible { opacity: 1; transform: translateY(0); }
+    h1,h2,h3 { margin-bottom: 20px; font-weight: 600; }
 
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            color: #333;
-        }
+    /* --- Header --- */
+    header { background-color: #ffffff; padding: 20px 40px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top:0; z-index: 1000; }
+    nav { display: flex; justify-content: space-between; align-items: center; }
+    nav ul { list-style: none; display: flex; gap: 25px; }
+    nav li a:hover { color: #16a085; }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    /* --- Hero --- */
+    #hero { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center; background-color: #16a085; color: #fff; border-radius: 10px; padding: 60px 20px; }
+    #hero p { font-size: 1.2rem; margin-top: 20px; }
 
-        /* --- Layout --- */
-        header, footer {
-            background-color: #2c3e50;
-            color: #fff;
-            padding: 20px 40px;
-        }
+    /* --- Featured Resources --- */
+    #featured-resources { padding: 0 20px; }
+    .highlight-cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .card { background-color: #fff; padding: 25px; border-radius: 12px; min-width: 280px; flex: 1 1 250px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; text-align: center; }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
 
-        header nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    /* --- Community Directory --- */
+    #community-directory { padding: 0 20px; text-align: center; }
+    .directory-controls { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .directory-controls input, .directory-controls select { padding: 12px 15px; border-radius: 8px; border: 1px solid #ccc; width: 250px; max-width: 90%; }
+    .directory-list { display: flex; flex-direction: column; gap: 15px; align-items: center; }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
+    /* --- Community Updates --- */
+    #community-updates { padding: 0 20px; }
+    .update-cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .update-card { background-color: #fff; padding: 20px; border-radius: 12px; min-width: 280px; flex: 1 1 250px; box-shadow: 0 6px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
+    .update-card:hover { transform: translateY(-5px); }
 
-        main {
-            padding: 40px;
-        }
+    /* --- Footer --- */
+    footer { text-align: center; background-color: #2c3e50; color: #fff; padding: 10px 20px; position: relative; }
+    #footer-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+    #footer-content.open { max-height: 200px; padding: 20px 0; }
+    #footer-toggle { background-color: #16a085; color: #fff; border:none; padding:10px 20px; margin-top:10px; cursor:pointer; border-radius:5px; }
 
-        section {
-            margin-bottom: 60px;
-        }
-
-        h1, h2, h3 {
-            margin-bottom: 20px;
-        }
-
-        /* --- Placeholder boxes --- */
-        .placeholder {
-            background-color: #dfe6e9;
-            border: 2px dashed #b2bec3;
-            min-height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #636e72;
-            font-style: italic;
-        }
-
-        /* --- Highlight cards --- */
-        .highlight-cards {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            flex: 1 1 30%;
-            min-width: 250px;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            position: relative;
-        }
-
-        #footer-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background-color: #34495e;
-            padding: 0 20px;
-            border-top: 1px solid #222;
-        }
-
-        #footer-content.open {
-            max-height: 200px; /* Adjust depending on content */
-            padding: 20px;
-        }
-
-        #footer-toggle {
-            background-color: #16a085;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        /* --- Forms and Inputs Placeholder --- */
-        input, textarea, select, button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-    </style>
+</style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">Sammamish Hub</div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Resources</a></li>
-                <li><a href="#">Submit a Resource</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- Header -->
+<header>
+    <nav>
+        <div class="logo"><strong>Sammamish Hub</strong></div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Submit a Resource</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section id="hero">
-            <h1>Welcome to the Sammamish Community Resource Hub</h1>
-            <p class="placeholder">Hero image / banner goes here</p>
-        </section>
+<main>
+    <!-- Hero -->
+    <section id="hero">
+        <h1>Welcome to Sammamish Community Resource Hub</h1>
+        <p>Your gateway to local resources, events, and programs.</p>
+    </section>
 
-        <!-- Featured Resources -->
-        <section id="featured-resources">
-            <h2>Featured Resources</h2>
-            <div class="highlight-cards">
-                <div class="card placeholder">Resource 1</div>
-                <div class="card placeholder">Resource 2</div>
-                <div class="card placeholder">Resource 3</div>
-            </div>
-        </section>
-
-        <!-- Community Directory -->
-        <section id="community-directory">
-            <h2>Community Directory</h2>
-            <div class="placeholder">
-                Search bar & filter options go here
-            </div>
-        </section>
-
-        <!-- Submit a New Resource -->
-        <section id="submit-resource">
-            <h2>Submit a New Resource</h2>
-            <div class="placeholder">
-                <form>
-                    <input type="text" placeholder="Resource Name">
-                    <input type="text" placeholder="Contact Info">
-                    <textarea placeholder="Description"></textarea>
-                    <select>
-                        <option>Select Category</option>
-                        <option>Non-Profit</option>
-                        <option>Support Service</option>
-                        <option>Community Event</option>
-                        <option>Program</option>
-                    </select>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Community Updates -->
-        <section id="community-updates">
-            <h2>Community Updates</h2>
-            <div class="placeholder">
-                Additional content for news, events, announcements
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <button id="footer-toggle">Show Info</button>
-        <div id="footer-content">
-            <p>&copy; 2025 Sammamish Community Resource Hub</p>
-            <p>Location: Sammamish, WA | Contact: info@sammamishhub.org</p>
-            <p>Social Icons Placeholder</p>
+    <!-- Featured Resources -->
+    <section id="featured-resources">
+        <h2>Featured Resources</h2>
+        <div class="highlight-cards">
+            <div class="card">Resource 1</div>
+            <div class="card">Resource 2</div>
+            <div class="card">Resource 3</div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        // Footer toggle functionality
-        const toggleBtn = document.getElementById('footer-toggle');
-        const footerContent = document.getElementById('footer-content');
+    <!-- Community Directory -->
+    <section id="community-directory">
+        <h2>Community Directory</h2>
+        <div class="directory-controls">
+            <input type="text" placeholder="Search resources...">
+            <select>
+                <option>Select Category</option>
+                <option>Non-Profit</option>
+                <option>Support Service</option>
+                <option>Event</option>
+                <option>Program</option>
+            </select>
+        </div>
+        <div class="directory-list">
+            <div class="card">Resource Item 1</div>
+            <div class="card">Resource Item 2</div>
+            <div class="card">Resource Item 3</div>
+        </div>
+    </section>
 
-        toggleBtn.addEventListener('click', () => {
-            footerContent.classList.toggle('open');
-            toggleBtn.textContent = footerContent.classList.contains('open') ? 'Hide Info' : 'Show Info';
+    <!-- Submit a New Resource -->
+    <section id="submit-resource">
+        <h2>Submit a New Resource</h2>
+        <form style="max-width:500px; margin: auto;">
+            <input type="text" placeholder="Resource Name">
+            <input type="text" placeholder="Contact Info">
+            <textarea placeholder="Description"></textarea>
+            <select>
+                <option>Select Category</option>
+                <option>Non-Profit</option>
+                <option>Support Service</option>
+                <option>Community Event</option>
+                <option>Program</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- Community Updates -->
+    <section id="community-updates">
+        <h2>Community Updates</h2>
+        <div class="update-cards">
+            <div class="update-card">Event / News 1</div>
+            <div class="update-card">Event / News 2</div>
+            <div class="update-card">Event / News 3</div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <button id="footer-toggle">Show Info</button>
+    <div id="footer-content">
+        <p>&copy; 2025 Sammamish Community Resource Hub</p>
+        <p>Location: Sammamish, WA | Contact: info@sammamishhub.org</p>
+        <p>Social Icons Placeholder</p>
+    </div>
+</footer>
+
+<script>
+    // Footer toggle
+    const toggleBtn = document.getElementById('footer-toggle');
+    const footerContent = document.getElementById('footer-content');
+    toggleBtn.addEventListener('click', () => {
+        footerContent.classList.toggle('open');
+        toggleBtn.textContent = footerContent.classList.contains('open') ? 'Hide Info' : 'Show Info';
+    });
+
+    // Scroll animations
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('visible');
+            }
         });
-    </script>
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
+</script>
 
 </body>
 </html>
