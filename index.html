@@ -18,7 +18,8 @@
     nav li a:hover { color: #16a085; }
 
     #hero { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center; background-color: #16a085; color: #fff; border-radius: 10px; padding: 60px 20px; }
-    #hero p { font-size: 1.2rem; margin-top: 20px; }
+    .placeholder { background-color: #dfe6e9; border: 2px dashed #b2bec3; color: #636e72; display: flex; align-items:center; justify-content:center; font-style: italic; }
+    #hero .placeholder { width: 80%; height: 150px; margin-top: 20px; }
 
     #featured-resources { padding: 0 20px; }
     .highlight-cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
@@ -32,7 +33,7 @@
 
     #community-updates { padding: 0 20px; }
     .update-cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-    .update-card { background-color: #fff; padding: 20px; border-radius: 12px; min-width: 280px; flex: 1 1 250px; box-shadow: 0 6px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
+    .update-card { background-color: #fff; padding: 20px; border-radius: 12px; min-width: 280px; flex: 1 1 250px; box-shadow: 0 6px 15px rgba(0,0,0,0.05); transition: transform 0.3s; display:flex; flex-direction:column; align-items:center; justify-content:center; height:120px; }
     .update-card:hover { transform: translateY(-5px); }
 
     footer { text-align: center; background-color: #2c3e50; color: #fff; padding: 10px 20px; position: relative; }
@@ -62,15 +63,15 @@
 <main>
     <section id="hero">
         <h1>Welcome to Sammamish Community Resource Hub</h1>
-        <p>Your gateway to local resources, events, and programs.</p>
+        <div class="placeholder">Hero Image Placeholder</div>
     </section>
 
     <section id="featured-resources">
         <h2>Featured Resources</h2>
         <div class="highlight-cards">
-            <div class="card">Resource 1</div>
-            <div class="card">Resource 2</div>
-            <div class="card">Resource 3</div>
+            <div class="card placeholder">Resource Placeholder 1</div>
+            <div class="card placeholder">Resource Placeholder 2</div>
+            <div class="card placeholder">Resource Placeholder 3</div>
         </div>
     </section>
 
@@ -114,9 +115,9 @@
     <section id="community-updates">
         <h2>Community Updates</h2>
         <div class="update-cards">
-            <div class="update-card">Event / News 1</div>
-            <div class="update-card">Event / News 2</div>
-            <div class="update-card">Event / News 3</div>
+            <div class="update-card placeholder">Update Placeholder 1</div>
+            <div class="update-card placeholder">Update Placeholder 2</div>
+            <div class="update-card placeholder">Update Placeholder 3</div>
         </div>
     </section>
 </main>
