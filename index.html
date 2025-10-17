@@ -86,6 +86,40 @@
         /* --- Footer --- */
         footer {
             text-align: center;
+            position: relative;
+        }
+
+        #footer-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #34495e;
+            padding: 0 20px;
+            border-top: 1px solid #222;
+        }
+
+        #footer-content.open {
+            max-height: 200px; /* Adjust depending on content */
+            padding: 20px;
+        }
+
+        #footer-toggle {
+            background-color: #16a085;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* --- Forms and Inputs Placeholder --- */
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
 
     </style>
@@ -114,8 +148,8 @@
             <p class="placeholder">Hero image / banner goes here</p>
         </section>
 
-        <!-- Highlighted Resources -->
-        <section id="highlighted-resources">
+        <!-- Featured Resources -->
+        <section id="featured-resources">
             <h2>Featured Resources</h2>
             <div class="highlight-cards">
                 <div class="card placeholder">Resource 1</div>
@@ -124,33 +158,63 @@
             </div>
         </section>
 
-        <!-- Interactive Directory -->
-        <section id="directory">
+        <!-- Community Directory -->
+        <section id="community-directory">
             <h2>Community Directory</h2>
-            <div class="placeholder">Search bar & filter options go here</div>
-        </section>
-
-        <!-- Resource Submission Form -->
-        <section id="submission-form">
-            <h2>Submit a New Resource</h2>
             <div class="placeholder">
-                Form fields go here (Name, Description, Contact Info, etc.)
+                Search bar & filter options go here
             </div>
         </section>
 
-        <!-- Additional Content -->
-        <section id="additional-content">
+        <!-- Submit a New Resource -->
+        <section id="submit-resource">
+            <h2>Submit a New Resource</h2>
+            <div class="placeholder">
+                <form>
+                    <input type="text" placeholder="Resource Name">
+                    <input type="text" placeholder="Contact Info">
+                    <textarea placeholder="Description"></textarea>
+                    <select>
+                        <option>Select Category</option>
+                        <option>Non-Profit</option>
+                        <option>Support Service</option>
+                        <option>Community Event</option>
+                        <option>Program</option>
+                    </select>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Community Updates -->
+        <section id="community-updates">
             <h2>Community Updates</h2>
-            <div class="placeholder">Additional content for the hub (news, events, announcements)</div>
+            <div class="placeholder">
+                Additional content for news, events, announcements
+            </div>
         </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Sammamish Community Resource Hub</p>
-        <p>Location: Sammamish, WA | Contact: info@sammamishhub.org</p>
-        <p>Social Icons Placeholder</p>
+        <button id="footer-toggle">Show Info</button>
+        <div id="footer-content">
+            <p>&copy; 2025 Sammamish Community Resource Hub</p>
+            <p>Location: Sammamish, WA | Contact: info@sammamishhub.org</p>
+            <p>Social Icons Placeholder</p>
+        </div>
     </footer>
+
+    <script>
+        // Footer toggle functionality
+        const toggleBtn = document.getElementById('footer-toggle');
+        const footerContent = document.getElementById('footer-content');
+
+        toggleBtn.addEventListener('click', () => {
+            footerContent.classList.toggle('open');
+            toggleBtn.textContent = footerContent.classList.contains('open') ? 'Hide Info' : 'Show Info';
+        });
+    </script>
 
 </body>
 </html>
