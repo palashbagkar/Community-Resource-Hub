@@ -18,8 +18,7 @@
     nav li a:hover { color: #16a085; }
 
     #hero { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center; background-color: #16a085; color: #fff; border-radius: 10px; padding: 60px 20px; }
-    .placeholder { background-color: #dfe6e9; border: 2px dashed #b2bec3; color: #636e72; display: flex; align-items:center; justify-content:center; font-style: italic; }
-    #hero .placeholder { width: 80%; height: 150px; margin-top: 20px; }
+    #hero img { width: 80%; max-width: 600px; border-radius:10px; margin-top: 20px; }
 
     #featured-resources { padding: 0 20px; }
     .highlight-cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
@@ -63,15 +62,25 @@
 <main>
     <section id="hero">
         <h1>Welcome to Sammamish Community Resource Hub</h1>
-        <div class="placeholder">Hero Image Placeholder</div>
+        <p>Your one-stop place to find local resources, programs, and events in Sammamish, WA.</p>
+        <img src="https://via.placeholder.com/600x250" alt="Community Hero Banner">
     </section>
 
     <section id="featured-resources">
         <h2>Featured Resources</h2>
         <div class="highlight-cards">
-            <div class="card placeholder">Resource Placeholder 1</div>
-            <div class="card placeholder">Resource Placeholder 2</div>
-            <div class="card placeholder">Resource Placeholder 3</div>
+            <div class="card">
+                <h3>Sammamish Food Bank</h3>
+                <p>Providing food assistance to residents in need. Open Monday-Friday, 10am-4pm.</p>
+            </div>
+            <div class="card">
+                <h3>Sammamish Community Center</h3>
+                <p>Offers recreational programs, workshops, and community events for all ages.</p>
+            </div>
+            <div class="card">
+                <h3>Sammamish Youth Support Services</h3>
+                <p>Support programs for youth including mentorship, counseling, and educational help.</p>
+            </div>
         </div>
     </section>
 
@@ -88,10 +97,22 @@
             </select>
         </div>
         <div class="directory-list" id="directoryList">
-            <div class="card" data-category="Non-Profit">Resource Item 1</div>
-            <div class="card" data-category="Support Service">Resource Item 2</div>
-            <div class="card" data-category="Event">Resource Item 3</div>
-            <div class="card" data-category="Program">Resource Item 4</div>
+            <div class="card" data-category="Non-Profit">
+                <h3>Sammamish Food Bank</h3>
+                <p>Provides groceries to families in need.</p>
+            </div>
+            <div class="card" data-category="Support Service">
+                <h3>Sammamish Counseling Center</h3>
+                <p>Offers mental health and wellness services.</p>
+            </div>
+            <div class="card" data-category="Event">
+                <h3>Sammamish Farmers Market</h3>
+                <p>Weekly market featuring local produce and crafts.</p>
+            </div>
+            <div class="card" data-category="Program">
+                <h3>Sammamish After-School Program</h3>
+                <p>Educational and recreational activities for children ages 5-12.</p>
+            </div>
         </div>
     </section>
 
@@ -115,9 +136,18 @@
     <section id="community-updates">
         <h2>Community Updates</h2>
         <div class="update-cards">
-            <div class="update-card placeholder">Update Placeholder 1</div>
-            <div class="update-card placeholder">Update Placeholder 2</div>
-            <div class="update-card placeholder">Update Placeholder 3</div>
+            <div class="update-card">
+                <h4>Sammamish Summer Festival</h4>
+                <p>Join the annual festival on June 15th for live music and food trucks.</p>
+            </div>
+            <div class="update-card">
+                <h4>New Youth Program Launch</h4>
+                <p>Starting August 1st, free workshops for teenagers in the community center.</p>
+            </div>
+            <div class="update-card">
+                <h4>Volunteer Opportunities</h4>
+                <p>Sign up to help at the local food bank or community events.</p>
+            </div>
         </div>
     </section>
 </main>
@@ -127,7 +157,7 @@
     <div id="footer-content">
         <p>&copy; 2025 Sammamish Community Resource Hub</p>
         <p>Location: Sammamish, WA | Contact: info@sammamishhub.org</p>
-        <p>Social Icons Placeholder</p>
+        <p>Follow us on social media: Facebook | Twitter | Instagram</p>
     </div>
 </footer>
 
@@ -136,47 +166,4 @@
     const toggleBtn = document.getElementById('footer-toggle');
     const footerContent = document.getElementById('footer-content');
     toggleBtn.addEventListener('click', () => {
-        footerContent.classList.toggle('open');
-        toggleBtn.textContent = footerContent.classList.contains('open') ? 'Hide Info' : 'Show Info';
-    });
-
-    // Scroll animations
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting){
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.2 });
-    sections.forEach(section => observer.observe(section));
-
-    // Directory search and filter
-    const searchInput = document.getElementById('searchInput');
-    const categorySelect = document.getElementById('categorySelect');
-    const directoryList = document.getElementById('directoryList');
-    const directoryCards = directoryList.querySelectorAll('.card');
-
-    function filterDirectory() {
-        const searchText = searchInput.value.toLowerCase();
-        const category = categorySelect.value;
-        directoryCards.forEach(card => {
-            const textMatch = card.textContent.toLowerCase().includes(searchText);
-            const categoryMatch = !category || card.dataset.category === category;
-            card.style.display = textMatch && categoryMatch ? 'block' : 'none';
-        });
-    }
-
-    searchInput.addEventListener('input', filterDirectory);
-    categorySelect.addEventListener('change', filterDirectory);
-
-    // Submit Resource Form
-    const resourceForm = document.getElementById('resourceForm');
-    resourceForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert("Thank you! Your resource has been submitted.");
-        resourceForm.reset();
-    });
-</script>
-</body>
-</html>
+        footerContent
