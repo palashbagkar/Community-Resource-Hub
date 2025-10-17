@@ -29,7 +29,7 @@ header {
 }
 nav { display: flex; justify-content: space-between; align-items: center; }
 nav ul { list-style: none; display: flex; gap: 25px; }
-nav li a:hover { color: #5C3A21; } /* brown hover */
+nav li a:hover { color: #fff; opacity:0.7; cursor:pointer; }
 
 /* Hero */
 #hero {
@@ -39,7 +39,7 @@ nav li a:hover { color: #5C3A21; } /* brown hover */
     justify-content: center;
     min-height: 50vh;
     text-align: center;
-    background-color: #0B3D2E; /* solid dark background */
+    background-color: #0B3D2E;
     color: #fff;
     padding: 40px 20px;
 }
@@ -47,15 +47,18 @@ nav li a:hover { color: #5C3A21; } /* brown hover */
 
 /* Cards */
 .card, .update-card {
-    background-color: #164040; /* slightly lighter dark for cards */
+    background-color: #164040; /* slightly lighter dark */
     color: #fff;
     padding: 20px;
     border-radius: 12px;
-    min-width: 280px;
-    flex: 1 1 250px;
+    width: 300px;
+    height: 200px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .card:hover, .update-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
 
@@ -64,18 +67,18 @@ nav li a:hover { color: #5C3A21; } /* brown hover */
 .highlight-cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
 
 #community-directory { padding: 0 20px; text-align: center; }
-.directory-controls { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
-.directory-controls input, .directory-controls select {
-    padding: 12px 15px; border-radius: 8px; border: 1px solid #ccc; width: 250px; max-width: 90%;
-}
-.directory-list { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+.directory-header { display:flex; justify-content:center; align-items:center; gap:10px; cursor:pointer; }
+.directory-header span { font-size:1.5rem; transition: transform 0.3s ease; }
+.directory-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:20px; justify-items:center; margin-top:15px; }
+.directory-list { width:100%; display:flex; flex-direction:column; gap:15px; align-items:center; }
 
+/* Updates */
 #community-updates { padding: 0 20px; }
 .update-cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
 
 /* Buttons */
-button, #footer-toggle {
-    background-color: #5C3A21; /* brown */
+button {
+    background-color: #1C3F5C;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -84,7 +87,7 @@ button, #footer-toggle {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-button:hover, #footer-toggle:hover { background-color: #1C3F5C; } /* navy hover */
+button:hover { background-color: #164040; }
 
 /* Footer */
 footer { text-align: center; background-color: #1C3F5C; color: #fff; padding: 10px 20px; position: relative; }
@@ -100,11 +103,11 @@ input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; border-rad
     <nav>
         <div class="logo"><strong>Sammamish Hub</strong></div>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Resources</a></li>
-            <li><a href="#">Submit a Resource</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#featured-resources">Resources</a></li>
+            <li><a href="#submit-resource">Submit a Resource</a></li>
+            <li><a href="#community-updates">Contact</a></li>
         </ul>
     </nav>
 </header>
@@ -116,6 +119,11 @@ input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; border-rad
     <img src="https://via.placeholder.com/600x250" alt="Community Hero Banner">
 </section>
 
+<section id="about">
+    <h2>About</h2>
+    <p>This hub provides centralized information on community services, events, and programs in Sammamish.</p>
+</section>
+
 <section id="featured-resources">
     <h2>Featured Resources</h2>
     <div class="highlight-cards" id="featuredList">
@@ -124,19 +132,24 @@ input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; border-rad
 </section>
 
 <section id="community-directory">
-    <h2>Community Directory</h2>
-    <div class="directory-controls">
-        <input type="text" id="searchInput" placeholder="Search resources...">
-        <select id="categorySelect">
-            <option value="">All Categories</option>
-            <option>Non-Profit</option>
-            <option>Support Service</option>
-            <option>Event</option>
-            <option>Program</option>
-        </select>
+    <div class="directory-header" id="directoryToggle">
+        <h2>Community Directory</h2>
+        <span id="dirArrow">^</span>
     </div>
-    <div class="directory-list" id="directoryList">
-        <!-- Directory cards injected by JS -->
+    <div id="directoryContainer">
+        <div class="directory-controls">
+            <input type="text" id="searchInput" placeholder="Search resources...">
+            <select id="categorySelect">
+                <option value="">All Categories</option>
+                <option>Non-Profit</option>
+                <option>Support Service</option>
+                <option>Event</option>
+                <option>Program</option>
+            </select>
+        </div>
+        <div class="directory-grid" id="directoryList">
+            <!-- Directory cards injected by JS -->
+        </div>
     </div>
 </section>
 
@@ -186,6 +199,14 @@ input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; border-rad
 </footer>
 
 <script>
+// Smooth nav scroll
+document.querySelectorAll('nav a').forEach(link=>{
+    link.addEventListener('click',e=>{
+        e.preventDefault();
+        document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    });
+});
+
 // Footer toggle
 const toggleBtn = document.getElementById('footer-toggle');
 const footerContent = document.getElementById('footer-content');
@@ -202,6 +223,15 @@ const observer = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.2 });
 sections.forEach(section => observer.observe(section));
+
+// Directory toggle
+const dirToggle = document.getElementById('directoryToggle');
+const dirContainer = document.getElementById('directoryContainer');
+const dirArrow = document.getElementById('dirArrow');
+dirToggle.addEventListener('click',()=>{
+    dirContainer.style.display = dirContainer.style.display==='none'?'block':'none';
+    dirArrow.textContent = dirContainer.style.display==='none'?'v':'^';
+});
 
 // Resources + Featured AI
 let resources = [
