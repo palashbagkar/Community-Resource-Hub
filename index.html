@@ -13,18 +13,19 @@ h1,h2,h3,h4 { margin-bottom:15px; font-weight:600; }
 
 /* Section Containers */
 .section-card {
-    background: #164040;
+    background: rgba(255,255,255,0.05);
     border-radius: 20px;
     padding: 40px;
     margin: 40px auto;
     max-width: 1200px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    backdrop-filter: blur(8px);
     transition: transform 0.3s ease;
 }
 .section-card:hover { transform: translateY(-4px); }
 
 /* Header */
-header { background-color:#1C3F5C; color:#fff; padding:20px 40px; position:sticky; top:0; z-index:1000; }
+header { background-color:#1A4965; color:#fff; padding:20px 40px; position:sticky; top:0; z-index:1000; }
 nav { display:flex; justify-content:space-between; align-items:center; }
 nav ul { list-style:none; display:flex; gap:25px; }
 nav li a:hover { opacity:0.8; cursor:pointer; }
@@ -37,25 +38,28 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
 #featured-resources { text-align:center; position:relative; }
 .featured-container { display:flex; justify-content:center; align-items:center; gap:20px; position:relative; flex-wrap:wrap; overflow:hidden; }
 .featured-card {
-    background: linear-gradient(145deg, rgba(28,63,92,0.9), rgba(90,62,38,0.9));
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
     border-radius: 15px;
     width:220px; height:180px;
     padding:20px;
     display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
-    transition: all 0.5s ease;
+    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     cursor:pointer;
+    border:1px solid rgba(255,255,255,0.2);
 }
 .featured-card.center {
     width:320px; height:240px;
-    background: linear-gradient(145deg, rgba(90,62,38,0.9), rgba(28,63,92,0.9));
+    background: rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,0.35);
 }
 .featured-nav {
     position:absolute; top:50%; transform:translateY(-50%);
-    background:none; border:none; color:white; font-size:2rem; cursor:pointer; user-select:none; transition: all 0.3s ease;
+    background:none; border:none; color:white; font-size:2.5rem; cursor:pointer; user-select:none; transition: all 0.3s ease;
 }
 .featured-nav:hover { color:#aaddff; }
-.featured-nav.left { left:-60px; }
-.featured-nav.right { right:-60px; }
+.featured-nav.left { left:-50px; }
+.featured-nav.right { right:-50px; }
 
 /* Community Directory */
 #community-directory { text-align:center; }
@@ -63,11 +67,10 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
     margin-top:20px;
     border-radius:15px;
     padding:25px;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
     border:1px solid rgba(255,255,255,0.3);
-    background-clip: padding-box;
-    transition: max-height 0.6s ease, opacity 0.6s ease;
+    transition: max-height 0.6s ease, opacity 0.6s ease, padding 0.6s ease;
     overflow:hidden;
 }
 .directory-container.closed { max-height:0; opacity:0; padding:0 25px; }
@@ -78,7 +81,7 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
 
 /* Directory Cards */
 .card {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.08);
     border-radius:12px;
     width:100%;
     padding:20px;
@@ -88,11 +91,10 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
     justify-content:center;
     align-items:center;
     text-align:center;
-    transition: all 0.3s ease, box-shadow 0.3s ease;
-    border:1px solid rgba(255,255,255,0.15);
-    background-clip: padding-box;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    border:1px solid rgba(255,255,255,0.2);
 }
-.card:hover { transform: scale(1.05); box-shadow:0 8px 25px rgba(0,0,0,0.4); }
+.card:hover { transform: scale(1.06) translateY(-6px); box-shadow:0 15px 35px rgba(0,0,0,0.35); }
 
 /* Search Bar */
 .search-bar {
@@ -104,33 +106,32 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
     border:1px solid rgba(255,255,255,0.3);
     color:#fff;
     margin:5px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .search-bar::placeholder { color: rgba(255,255,255,0.7); }
-.search-bar:focus { background-color: rgba(255,255,255,0.25); box-shadow: 0 0 15px rgba(255,255,255,0.3); outline:none; }
+.search-bar:focus { background-color: rgba(255,255,255,0.25); box-shadow: 0 0 20px rgba(255,255,255,0.25); outline:none; }
 
 /* Submit Resource Form */
 #submit-resource form { display:flex; flex-direction:column; gap:15px; }
 input, textarea, select {
     width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.05); color:#fff; transition:all 0.3s ease;
+    background: rgba(255,255,255,0.05); color:#fff; transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-input:focus, textarea:focus, select:focus { background: rgba(255,255,255,0.15); box-shadow:0 0 15px rgba(255,255,255,0.2); outline:none; }
+input:focus, textarea:focus, select:focus { background: rgba(255,255,255,0.15); box-shadow:0 0 20px rgba(255,255,255,0.2); outline:none; }
 
 /* Buttons */
 button {
-    background-color: #1C3F5C; color:#fff; border:none; border-radius:8px; padding:12px 25px; cursor:pointer;
-    transition: all 0.3s ease;
+    background-color: #1A4965; color:#fff; border:none; border-radius:8px; padding:12px 25px; cursor:pointer;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s ease;
 }
-button:hover { background-color:#164040; }
+button:hover { transform: scale(1.05); background-color:#14505a; }
 
 /* Updates */
 .update-cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
 
-footer { text-align:center; background-color: #1C3F5C; color:#fff; padding:10px 20px; position:relative; }
+footer { text-align:center; background-color: #1A4965; color:#fff; padding:10px 20px; position:relative; }
 #footer-content { max-height:0; overflow:hidden; transition:max-height 0.3s ease, padding 0.3s ease; }
 #footer-content.open { max-height:200px; padding:20px 0; }
-
 </style>
 </head>
 <body>
@@ -334,7 +335,19 @@ document.getElementById('resourceForm').addEventListener('submit',e=>{
     e.target.reset();
     alert("Thank you! Your resource has been submitted and added to the directory.");
 });
-</script>
 
+// Liquid tilt effect for featured cards
+document.querySelectorAll('.featured-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    card.style.transform = `scale(1.06) rotateY(${x/20}deg) rotateX(${-y/20}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = card.classList.contains('center') ? 'scale(1.06) rotateY(0deg) rotateX(0deg)' : 'scale(1) rotateY(0deg) rotateX(0deg)';
+  });
+});
+</script>
 </body>
 </html>
