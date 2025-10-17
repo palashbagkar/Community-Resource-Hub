@@ -6,164 +6,131 @@
 <title>Sammamish Community Resource Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin:0; padding:0; }
-body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #0B3D2E;
-    color: #fff;
-    scroll-behavior: smooth;
-}
-a { text-decoration: none; color: inherit; }
-h1,h2,h3,h4 { margin-bottom: 15px; font-weight: 600; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Montserrat',sans-serif; background-color:#0B3D2E; color:white; scroll-behavior:smooth; }
+a { text-decoration:none; color:inherit; }
+h1,h2,h3,h4 { margin-bottom:15px; font-weight:600; }
 
 /* Section Containers */
 .section-card {
-    background-color: #164040;
-    border-radius: 15px;
-    padding: 30px;
+    background: #164040;
+    border-radius: 20px;
+    padding: 40px;
     margin: 40px auto;
     max-width: 1200px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     transition: transform 0.3s ease;
 }
 .section-card:hover { transform: translateY(-4px); }
 
 /* Header */
-header {
-    background-color: #1C3F5C;
-    color: #fff;
-    padding: 20px 40px;
-    position: sticky;
-    top:0;
-    z-index: 1000;
-}
-nav { display: flex; justify-content: space-between; align-items: center; }
-nav ul { list-style: none; display: flex; gap: 25px; }
+header { background-color:#1C3F5C; color:#fff; padding:20px 40px; position:sticky; top:0; z-index:1000; }
+nav { display:flex; justify-content:space-between; align-items:center; }
+nav ul { list-style:none; display:flex; gap:25px; }
 nav li a:hover { opacity:0.8; cursor:pointer; }
 
 /* Hero */
-#hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 50vh;
-    text-align: center;
-    padding: 40px 20px;
-}
-#hero img { width: 80%; max-width: 600px; border-radius:10px; margin-top: 20px; }
+#hero { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:50vh; text-align:center; padding:40px 20px; }
+#hero img { width:80%; max-width:600px; border-radius:10px; margin-top:20px; }
 
 /* Featured Resources Carousel */
-#featured-resources { text-align:center; }
-.featured-container { display:flex; justify-content:center; align-items:center; gap:20px; position:relative; flex-wrap:wrap; }
+#featured-resources { text-align:center; position:relative; }
+.featured-container { display:flex; justify-content:center; align-items:center; gap:20px; position:relative; flex-wrap:wrap; overflow:hidden; }
 .featured-card {
-    background-color: #1C3F5C;
-    border-radius: 12px;
-    width: 220px;
-    height: 180px;
-    padding: 20px;
+    background: linear-gradient(145deg, rgba(28,63,92,0.9), rgba(90,62,38,0.9));
+    border-radius: 15px;
+    width:220px; height:180px;
+    padding:20px;
+    display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
     transition: all 0.5s ease;
     cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    text-align:center;
 }
 .featured-card.center {
-    width: 300px;
-    height: 220px;
-    background-color: #164040;
+    width:320px; height:240px;
+    background: linear-gradient(145deg, rgba(90,62,38,0.9), rgba(28,63,92,0.9));
 }
 .featured-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background:none;
-    border:none;
-    color:white;
-    font-size:2rem;
-    cursor:pointer;
-    user-select:none;
-    transition: all 0.3s ease;
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:none; border:none; color:white; font-size:2rem; cursor:pointer; user-select:none; transition: all 0.3s ease;
 }
 .featured-nav:hover { color:#aaddff; }
-.featured-nav.left { left:-50px; }
-.featured-nav.right { right:-50px; }
+.featured-nav.left { left:-60px; }
+.featured-nav.right { right:-60px; }
 
 /* Community Directory */
 #community-directory { text-align:center; }
 .directory-container {
     margin-top:20px;
-    border-radius:12px;
-    padding:20px;
-    background-color: rgba(255,255,255,0.05);
-    backdrop-filter: blur(8px);
+    border-radius:15px;
+    padding:25px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border:1px solid rgba(255,255,255,0.3);
+    background-clip: padding-box;
     transition: max-height 0.6s ease, opacity 0.6s ease;
     overflow:hidden;
 }
-.directory-container.closed { max-height:0; opacity:0; }
+.directory-container.closed { max-height:0; opacity:0; padding:0 25px; }
 .directory-container.open { max-height:2000px; opacity:1; }
-.directory-header { display:flex; justify-content:center; align-items:center; gap:10px; cursor:pointer; margin-bottom:15px; }
+.directory-header { display:flex; justify-content:center; align-items:center; gap:10px; cursor:pointer; margin-bottom:20px; }
 .directory-header svg { width: 24px; height:24px; transition: transform 0.3s ease; }
 .directory-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px; justify-items:center; }
 
 /* Directory Cards */
 .card {
-    background-color:#1C3F5C;
+    background: rgba(255,255,255,0.05);
     border-radius:12px;
     width:100%;
-    padding:15px;
-    height:160px;
+    padding:20px;
+    min-height:160px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, box-shadow 0.3s ease;
+    border:1px solid rgba(255,255,255,0.15);
+    background-clip: padding-box;
 }
-.card:hover { transform: scale(1.05); }
+.card:hover { transform: scale(1.05); box-shadow:0 8px 25px rgba(0,0,0,0.4); }
 
 /* Search Bar */
 .search-bar {
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
     background-color: rgba(255,255,255,0.15);
-    border-radius: 12px;
+    border-radius: 15px;
     padding: 10px 15px;
-    width: 200px;
+    width: 220px;
     border:1px solid rgba(255,255,255,0.3);
     color:#fff;
     margin:5px;
     transition: all 0.3s ease;
 }
 .search-bar::placeholder { color: rgba(255,255,255,0.7); }
-.search-bar:focus { background-color: rgba(255,255,255,0.25); box-shadow: 0 0 12px rgba(255,255,255,0.3); outline:none; }
+.search-bar:focus { background-color: rgba(255,255,255,0.25); box-shadow: 0 0 15px rgba(255,255,255,0.3); outline:none; }
 
 /* Submit Resource Form */
-#submit-resource form {
-    display:flex; flex-direction:column; gap:10px;
+#submit-resource form { display:flex; flex-direction:column; gap:15px; }
+input, textarea, select {
+    width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05); color:#fff; transition:all 0.3s ease;
 }
-input, textarea, select { width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); color:#fff; transition:all 0.3s ease; }
-input:focus, textarea:focus, select:focus { background: rgba(255,255,255,0.15); box-shadow:0 0 12px rgba(255,255,255,0.2); outline:none; }
+input:focus, textarea:focus, select:focus { background: rgba(255,255,255,0.15); box-shadow:0 0 15px rgba(255,255,255,0.2); outline:none; }
 
 /* Buttons */
 button {
-    background-color: #1C3F5C;
-    color:#fff;
-    border:none;
-    border-radius:5px;
-    padding:10px 20px;
-    cursor:pointer;
-    transition:all 0.3s ease;
+    background-color: #1C3F5C; color:#fff; border:none; border-radius:8px; padding:12px 25px; cursor:pointer;
+    transition: all 0.3s ease;
 }
 button:hover { background-color:#164040; }
 
 /* Updates */
 .update-cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
 
-/* Footer */
 footer { text-align:center; background-color: #1C3F5C; color:#fff; padding:10px 20px; position:relative; }
 #footer-content { max-height:0; overflow:hidden; transition:max-height 0.3s ease, padding 0.3s ease; }
 #footer-content.open { max-height:200px; padding:20px 0; }
+
 </style>
 </head>
 <body>
@@ -211,7 +178,7 @@ footer { text-align:center; background-color: #1C3F5C; color:#fff; padding:10px 
         <svg id="dirArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>
     </div>
     <div class="directory-container closed" id="directoryContainer">
-        <div>
+        <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
             <input type="text" id="searchInput" class="search-bar" placeholder="Search resources...">
             <select id="categorySelect" class="search-bar">
                 <option value="">All Categories</option>
@@ -250,7 +217,6 @@ footer { text-align:center; background-color: #1C3F5C; color:#fff; padding:10px 
         <div class="update-card card"><h4>Volunteer Opportunities</h4><p>Help at the food bank, community center, or local events.</p></div>
     </div>
 </section>
-</main>
 
 <footer>
     <button id="footer-toggle">Show Info</button>
@@ -287,7 +253,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 sections.forEach(section => observer.observe(section));
 
-// Directory toggle with rotation
+// Directory toggle
 const dirToggle = document.getElementById('directoryToggle');
 const dirContainer = document.getElementById('directoryContainer');
 const dirArrow = document.getElementById('dirArrow');
@@ -297,7 +263,7 @@ dirToggle.addEventListener('click',()=>{
     dirArrow.style.transform = dirContainer.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
 });
 
-// Resources + Featured AI
+// Resources
 let resources = [
     {name:"Sammamish Food Bank", description:"Providing food assistance to residents in need.", category:"Non-Profit", popularity:5},
     {name:"Sammamish Community Center", description:"Recreational programs, workshops, community events.", category:"Program", popularity:4},
@@ -305,38 +271,29 @@ let resources = [
     {name:"Sammamish Farmers Market", description:"Every Saturday May-Sept, local produce and crafts.", category:"Event", popularity:2}
 ];
 
-// Community Directory Rendering
+// Directory Rendering
 function renderDirectory(){
     const list = document.getElementById('directoryList');
     list.innerHTML = '';
     resources.forEach((res,i)=>{
         const card = document.createElement('div');
-        card.className = 'card';
-        card.dataset.category = res.category;
-        card.innerHTML = `<h3>${res.name}</h3><p>${res.description}</p>`;
+        card.className='card';
+        card.dataset.category=res.category;
+        card.innerHTML=`<h3>${res.name}</h3><p>${res.description}</p>`;
         card.addEventListener('click',()=>{ res.popularity++; updateFeatured(); });
         list.appendChild(card);
     });
 }
 
-// Featured Resources Carousel
-let featuredOrder = [0,1,2]; // left, center, right
+// Featured Carousel
 function updateFeatured(){
     let sorted = [...resources].sort((a,b)=>b.popularity-a.popularity);
-    featuredOrder = [0,1,2];
-    renderCarousel();
+    document.getElementById('leftCard').innerHTML=`<h3>${sorted[0].name}</h3><p>${sorted[0].description}</p>`;
+    document.getElementById('centerCard').innerHTML=`<h3>${sorted[1].name}</h3><p>${sorted[1].description}</p>`;
+    document.getElementById('rightCard').innerHTML=`<h3>${sorted[2].name}</h3><p>${sorted[2].description}</p>`;
 }
-function renderCarousel(){
-    const leftCard = document.getElementById('leftCard');
-    const centerCard = document.getElementById('centerCard');
-    const rightCard = document.getElementById('rightCard');
-    const sorted = [...resources].sort((a,b)=>b.popularity-a.popularity);
-    leftCard.innerHTML = `<h3>${sorted[0].name}</h3><p>${sorted[0].description}</p>`;
-    centerCard.innerHTML = `<h3>${sorted[1].name}</h3><p>${sorted[1].description}</p>`;
-    rightCard.innerHTML = `<h3>${sorted[2].name}</h3><p>${sorted[2].description}</p>`;
-}
-renderDirectory();
 updateFeatured();
+renderDirectory();
 
 // Carousel buttons
 document.getElementById('prevBtn').addEventListener('click',()=>{
