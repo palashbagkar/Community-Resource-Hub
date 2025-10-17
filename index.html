@@ -18,11 +18,11 @@ h1,h2,h3,h4 { margin-bottom:15px; font-weight:600; }
     padding: 40px;
     margin: 40px auto;
     max-width: 1200px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     backdrop-filter: blur(8px);
     transition: transform 0.3s ease;
 }
-.section-card:hover { transform: translateY(-4px); }
+.section-card:hover { transform: translateY(-2px); }
 
 /* Header */
 header { background-color:#1A4965; color:#fff; padding:20px 40px; position:sticky; top:0; z-index:1000; }
@@ -38,26 +38,25 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
 #featured-resources { text-align:center; position:relative; }
 .featured-container { display:flex; justify-content:center; align-items:center; gap:20px; position:relative; flex-wrap:wrap; overflow:hidden; }
 .featured-card {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    border-radius: 15px;
-    width:220px; height:180px;
-    padding:20px;
-    display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
-    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    cursor:pointer;
-    border:1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  width:220px; height:180px;
+  padding:20px;
+  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+  border:1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transition: all 0.5s ease;
+  cursor:pointer;
 }
 .featured-card.center {
-    width:320px; height:240px;
-    background: rgba(255,255,255,0.15);
-    border:1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.35);
 }
-.featured-nav {
-    position:absolute; top:50%; transform:translateY(-50%);
-    background:none; border:none; color:white; font-size:2.5rem; cursor:pointer; user-select:none; transition: all 0.3s ease;
+.featured-nav { 
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:none; border:none; color:white; font-size:2rem; cursor:pointer; user-select:none;
 }
-.featured-nav:hover { color:#aaddff; }
 .featured-nav.left { left:-50px; }
 .featured-nav.right { right:-50px; }
 
@@ -74,10 +73,10 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
     overflow:hidden;
 }
 .directory-container.closed { max-height:0; opacity:0; padding:0 25px; }
-.directory-container.open { max-height:2000px; opacity:1; }
+.directory-container.open { max-height:2000px; opacity:1; padding:25px; }
 .directory-header { display:flex; justify-content:center; align-items:center; gap:10px; cursor:pointer; margin-bottom:20px; }
 .directory-header svg { width: 24px; height:24px; transition: transform 0.3s ease; }
-.directory-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px; justify-items:center; }
+.directory-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px; justify-items:center; margin-top:20px; }
 
 /* Directory Cards */
 .card {
@@ -91,10 +90,9 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
     justify-content:center;
     align-items:center;
     text-align:center;
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     border:1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
-.card:hover { transform: scale(1.06) translateY(-6px); box-shadow:0 15px 35px rgba(0,0,0,0.35); }
 
 /* Search Bar */
 .search-bar {
@@ -111,7 +109,7 @@ nav li a:hover { opacity:0.8; cursor:pointer; }
 .search-bar::placeholder { color: rgba(255,255,255,0.7); }
 .search-bar:focus { background-color: rgba(255,255,255,0.25); box-shadow: 0 0 20px rgba(255,255,255,0.25); outline:none; }
 
-/* Submit Resource Form */
+/* Submit Resource Form (matches directory) */
 #submit-resource form { display:flex; flex-direction:column; gap:15px; }
 input, textarea, select {
     width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.3);
@@ -245,15 +243,6 @@ toggleBtn.addEventListener('click', () => {
     toggleBtn.textContent = footerContent.classList.contains('open') ? 'Hide Info' : 'Show Info';
 });
 
-// Scroll animations
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting){ entry.target.classList.add('visible'); }
-    });
-}, { threshold: 0.2 });
-sections.forEach(section => observer.observe(section));
-
 // Directory toggle
 const dirToggle = document.getElementById('directoryToggle');
 const dirContainer = document.getElementById('directoryContainer');
@@ -286,25 +275,29 @@ function renderDirectory(){
     });
 }
 
-// Featured Carousel
-function updateFeatured(){
-    let sorted = [...resources].sort((a,b)=>b.popularity-a.popularity);
-    document.getElementById('leftCard').innerHTML=`<h3>${sorted[0].name}</h3><p>${sorted[0].description}</p>`;
-    document.getElementById('centerCard').innerHTML=`<h3>${sorted[1].name}</h3><p>${sorted[1].description}</p>`;
-    document.getElementById('rightCard').innerHTML=`<h3>${sorted[2].name}</h3><p>${sorted[2].description}</p>`;
-}
-updateFeatured();
-renderDirectory();
+// Carousel Logic
+let featuredIndex = 1;
+const featuredCards = [document.getElementById('leftCard'), document.getElementById('centerCard'), document.getElementById('rightCard')];
 
-// Carousel buttons
+function updateFeatured(){
+    const sorted = [...resources].sort((a,b)=>b.popularity-a.popularity);
+    featuredCards[0].innerHTML=`<h3>${sorted[(featuredIndex-1+sorted.length)%sorted.length].name}</h3><p>${sorted[(featuredIndex-1+sorted.length)%sorted.length].description}</p>`;
+    featuredCards[1].innerHTML=`<h3>${sorted[featuredIndex].name}</h3><p>${sorted[featuredIndex].description}</p>`;
+    featuredCards[2].innerHTML=`<h3>${sorted[(featuredIndex+1)%sorted.length].name}</h3><p>${sorted[(featuredIndex+1)%sorted.length].description}</p>`;
+    featuredCards.forEach((card,i)=>card.className=i===1?'featured-card center':'featured-card');
+}
+
 document.getElementById('prevBtn').addEventListener('click',()=>{
-    resources.unshift(resources.pop());
+    featuredIndex = (featuredIndex - 1 + resources.length) % resources.length;
     updateFeatured();
 });
 document.getElementById('nextBtn').addEventListener('click',()=>{
-    resources.push(resources.shift());
+    featuredIndex = (featuredIndex + 1) % resources.length;
     updateFeatured();
 });
+
+updateFeatured();
+renderDirectory();
 
 // Search/filter
 document.getElementById('searchInput').addEventListener('input',filterDirectory);
@@ -334,19 +327,6 @@ document.getElementById('resourceForm').addEventListener('submit',e=>{
     filterDirectory();
     e.target.reset();
     alert("Thank you! Your resource has been submitted and added to the directory.");
-});
-
-// Liquid tilt effect for featured cards
-document.querySelectorAll('.featured-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width/2;
-    const y = e.clientY - rect.top - rect.height/2;
-    card.style.transform = `scale(1.06) rotateY(${x/20}deg) rotateX(${-y/20}deg)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = card.classList.contains('center') ? 'scale(1.06) rotateY(0deg) rotateX(0deg)' : 'scale(1) rotateY(0deg) rotateX(0deg)';
-  });
 });
 </script>
 </body>
