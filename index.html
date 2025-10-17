@@ -6,12 +6,11 @@
 <title>Sammamish Community Resource Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* === Global Styles === */
 * { box-sizing: border-box; margin:0; padding:0; }
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #F5F5F0;
-    color: #fff; /* primary text white */
+    background-color: #0B3D2E; /* dark green background */
+    color: #fff;
     scroll-behavior: smooth;
 }
 a { text-decoration: none; color: inherit; }
@@ -19,21 +18,20 @@ h1,h2,h3,h4 { margin-bottom: 15px; font-weight: 600; }
 section { margin-bottom: 80px; opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
 section.visible { opacity: 1; transform: translateY(0); }
 
-/* === Header === */
+/* Header */
 header {
-    background-color: #0B3D2E; /* Dark Green */
+    background-color: #1C3F5C; /* navy header */
     color: #fff;
     padding: 20px 40px;
     position: sticky;
     top:0;
     z-index: 1000;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
 nav { display: flex; justify-content: space-between; align-items: center; }
 nav ul { list-style: none; display: flex; gap: 25px; }
-nav li a:hover { color: #1C3F5C; } /* Navy accent */
+nav li a:hover { color: #5C3A21; } /* brown hover */
 
-/* === Hero === */
+/* Hero */
 #hero {
     display: flex;
     flex-direction: column;
@@ -41,17 +39,16 @@ nav li a:hover { color: #1C3F5C; } /* Navy accent */
     justify-content: center;
     min-height: 50vh;
     text-align: center;
-    background: linear-gradient(135deg, #1C3F5C 0%, #5C3A21 100%); /* Navy + Rich Brown */
+    background-color: #0B3D2E; /* solid dark background */
     color: #fff;
-    border-radius: 0 0 15px 15px;
     padding: 40px 20px;
 }
 #hero img { width: 80%; max-width: 600px; border-radius:10px; margin-top: 20px; }
 
-/* === Cards === */
+/* Cards */
 .card, .update-card {
-    background-color: #fff;
-    color: #0B3D2E; /* text dark green inside cards for contrast */
+    background-color: #164040; /* slightly lighter dark for cards */
+    color: #fff;
     padding: 20px;
     border-radius: 12px;
     min-width: 280px;
@@ -62,11 +59,10 @@ nav li a:hover { color: #1C3F5C; } /* Navy accent */
 }
 .card:hover, .update-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
 
-/* === Featured Resources === */
+/* Sections */
 #featured-resources { padding: 0 20px; }
 .highlight-cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
 
-/* === Community Directory === */
 #community-directory { padding: 0 20px; text-align: center; }
 .directory-controls { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
 .directory-controls input, .directory-controls select {
@@ -74,13 +70,12 @@ nav li a:hover { color: #1C3F5C; } /* Navy accent */
 }
 .directory-list { display: flex; flex-direction: column; gap: 15px; align-items: center; }
 
-/* === Community Updates === */
 #community-updates { padding: 0 20px; }
 .update-cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
 
-/* === Footer === */
+/* Buttons */
 button, #footer-toggle {
-    background-color: #1C3F5C; /* Navy button */
+    background-color: #5C3A21; /* brown */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -89,9 +84,10 @@ button, #footer-toggle {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-button:hover, #footer-toggle:hover { background-color: #5C3A21; /* Brown hover */ }
+button:hover, #footer-toggle:hover { background-color: #1C3F5C; } /* navy hover */
 
-footer { text-align: center; background-color: #0B3D2E; color: #fff; padding: 10px 20px; position: relative; }
+/* Footer */
+footer { text-align: center; background-color: #1C3F5C; color: #fff; padding: 10px 20px; position: relative; }
 #footer-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
 #footer-content.open { max-height: 200px; padding: 20px 0; }
 
@@ -190,7 +186,7 @@ input, textarea, select { width: 100%; padding: 10px; margin: 10px 0; border-rad
 </footer>
 
 <script>
-/* === Footer Toggle === */
+// Footer toggle
 const toggleBtn = document.getElementById('footer-toggle');
 const footerContent = document.getElementById('footer-content');
 toggleBtn.addEventListener('click', () => {
@@ -198,7 +194,7 @@ toggleBtn.addEventListener('click', () => {
     toggleBtn.textContent = footerContent.classList.contains('open') ? 'Hide Info' : 'Show Info';
 });
 
-/* === Scroll Animations === */
+// Scroll animations
 const sections = document.querySelectorAll('section');
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -207,7 +203,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 sections.forEach(section => observer.observe(section));
 
-/* === Directory + Featured AI === */
+// Resources + Featured AI
 let resources = [
     {name:"Sammamish Food Bank", description:"Providing food assistance to residents in need.", category:"Non-Profit", popularity:5},
     {name:"Sammamish Community Center", description:"Recreational programs, workshops, community events.", category:"Program", popularity:4},
@@ -227,10 +223,11 @@ function renderDirectory(){
         list.appendChild(card);
     });
 }
+
 function updateFeatured(){
     const featuredList = document.getElementById('featuredList');
     featuredList.innerHTML = '';
-    const top = [...resources].sort((a,b)=>b.popularity - a.popularity).slice(0,3);
+    const top = [...resources].sort((a,b)=>b.popularity-a.popularity).slice(0,3);
     top.forEach(res=>{
         const card = document.createElement('div');
         card.className = 'card';
@@ -238,9 +235,10 @@ function updateFeatured(){
         featuredList.appendChild(card);
     });
 }
-renderDirectory(); updateFeatured();
+renderDirectory();
+updateFeatured();
 
-/* === Search/Filter === */
+// Search/filter
 document.getElementById('searchInput').addEventListener('input',filterDirectory);
 document.getElementById('categorySelect').addEventListener('change',filterDirectory);
 function filterDirectory(){
@@ -255,15 +253,17 @@ function filterDirectory(){
     });
 }
 
-/* === Submit Form === */
+// Submit resource
 document.getElementById('resourceForm').addEventListener('submit',e=>{
     e.preventDefault();
     const name = document.getElementById('resName').value;
     const desc = document.getElementById('resDescription').value;
     const contact = document.getElementById('resContact').value;
     const cat = document.getElementById('resCategory').value;
-    resources.push({name:name, description:desc + ' Contact: '+contact, category:cat, popularity:1});
-    renderDirectory(); updateFeatured(); filterDirectory();
+    resources.push({name:name, description:desc+' Contact: '+contact, category:cat, popularity:1});
+    renderDirectory();
+    updateFeatured();
+    filterDirectory();
     e.target.reset();
     alert("Thank you! Your resource has been submitted and added to the directory.");
 });
